@@ -1,4 +1,4 @@
-export { Maintenance };
+export default Maintenance;
 
 function Maintenance() {
   return <>

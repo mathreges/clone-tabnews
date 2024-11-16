@@ -1,4 +1,4 @@
-import { Maintenance } from './maintenance/index.js';
+import Maintenance from './maintenance/index.js';
 
 export default Home;
 

@@ -3,6 +3,10 @@ import { join } from "node:path";
 import database from 'infra/database';
 
 export default async function migrations(request, response) {
+  if (request.method != 'GET' && request.method != 'POST') {
+    return console.error(`Request method ${request.method} not allowed.`);
+  }
+
   const client = await database.getClientConnection();
   const defaultMigrationsOptions = {
     dbClient: client,

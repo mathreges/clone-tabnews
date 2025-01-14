@@ -1,4 +1,4 @@
-import './maintenance/index.css';
+import "./maintenance/index.css";
 
 export default function App({ Component, pageProps }) {
   return <Component {...pageProps} />;

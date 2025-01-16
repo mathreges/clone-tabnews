@@ -1,4 +1,4 @@
-import retry from "async-retry";
+import retry from "async-retry"
 
 async function waitForAllServices() {
   const statusEndpoint = "http://localhost:3000/api/v1/status";

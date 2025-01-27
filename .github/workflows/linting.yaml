@@ -1,4 +1,4 @@
-name: Linting Prettier
+name: Linting
 
 on: pull_request
 

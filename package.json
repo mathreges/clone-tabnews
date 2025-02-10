@@ -15,7 +15,7 @@
     "prettier:check": "prettier --check .",
     "prettier:fix": "prettier --write .",
     "lint:eslint:check": "next lint --dir .",
-    "test": "(npm run services:up && npm run services:wait:database && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\")  || (exit 0)",
+    "test": "npm run services:up && npm run services:wait:database && concurrently --names next,jest,node tests/wait-for-postgres.js --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\" exit 1 && npm run services:down",
     "posttest": "npm run services:down",
     "test:watch": "npm run services:up && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand\"",
     "prepare": "husky",

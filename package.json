@@ -17,7 +17,7 @@
     "lint:eslint:check": "next lint --dir .",
     "test": "npm run services:up && npm run services:wait:database && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"",
     "posttest": "npm run services:down",
-    "test:watch": "npm run services:up && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand\"",
+    "test:watch": "npm run services:up && npm run services:wait:database && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand --verbose\"",
     "prepare": "husky",
     "commit": "cz"
   },

@@ -1,5 +1,7 @@
 export default Maintenance;
 
+import Link from "next/link";
+
 function Maintenance() {
   return (
     <>
@@ -17,10 +19,13 @@ function Maintenance() {
             repository so you can be notified of the progress{" "}
             <a href="https://github.com/mathreges/clone-tabnews">here</a>!
           </p>
-          <span>
+          <p>
             Base project:{" "}
             <a href="https://www.tabnews.com.br/">tabnews.com.br</a>
-          </span>
+          </p>
+          <p>
+            <Link href="/status">Click here to check project status</Link>
+          </p>
         </div>
         <LoadingCircle />
       </div>
@@ -40,7 +45,7 @@ function LoadingCircle() {
             </svg>
             <div className="num">
               <h2>
-                7<span>%</span>
+                18<span>%</span>
               </h2>
             </div>
             <a

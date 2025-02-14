@@ -1,0 +1,29 @@
+.status {
+  margin: 2rem auto;
+  display: block;
+  max-width: max-content;
+}
+
+.status__update,
+.status__database {
+  padding: 1rem;
+  background: dimgray;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #e9f8ff;
+}
+
+.status h1,
+.status h2 {
+  margin-bottom: 0.5rem;
+}
+
+.status .home-link {
+  margin: 0 auto;
+  display: block;
+  width: fit-content;
+  padding: 0.5rem;
+  background: gray;
+  text-decoration: none;
+  border-radius: 0.5rem;
+}

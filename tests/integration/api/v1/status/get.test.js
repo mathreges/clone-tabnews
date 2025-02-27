@@ -4,7 +4,7 @@ beforeAll(async () => {
   await orchestrator.waitForAllServices();
 });
 
-describe("GET to /api/v1/migrations/", () => {
+describe("GET to /api/v1/status/", () => {
   describe("Anonymous User", () => {
     test("Retriving system status", async () => {
       const endpoint = "http://localhost:3000/api/v1/status";

@@ -17,7 +17,7 @@
     "lint:eslint:check": "next lint --dir .",
     "test": "npm run services:up && npm run services:wait:database && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"",
     "posttest": "npm run services:down",
-    "test:watch": "npm run services:up && npm run services:wait:database && concurrently --names next,jest --hide next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand --verbose\"",
+    "test:watch": "npm run services:up && npm run services:wait:database && concurrently --names next,jest next -k -s command-jest \"next dev\" \"jest --watchAll --runInBand --verbose\"",
     "prepare": "husky",
     "commit": "cz"
   },
@@ -29,6 +29,7 @@
     "dotenv": "16.4.5",
     "dotenv-expand": "11.0.6",
     "next": "14.2.5",
+    "next-connect": "1.0.0",
     "node-pg-migrate": "7.6.1",
     "pg": "8.12.0",
     "react": "18.3.1",

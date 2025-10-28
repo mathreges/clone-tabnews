@@ -1,11 +1,42 @@
 import database from "infra/database";
-import { ValidationError } from "infra/errors";
+import { ValidationError, NotFoundError } from "infra/errors";
 import { validate } from "uuid";
 
 async function create(userInputValues) {
   const newUser = await runInsertQuery(userInputValues);
 
   return newUser;
+}
+
+async function findOneByUsername(username) {
+  const user = await runSelectQuery(username);
+
+  return user;
+}
+
+async function runSelectQuery(username) {
+  const results = await database.query({
+    text: `
+      SELECT 
+        *
+      FROM 
+        users 
+      WHERE 
+        LOWER(username) = LOWER($1)
+      LIMIT
+        1
+    ;`,
+    values: [username],
+  });
+
+  if (results.rowCount === 0) {
+    throw new NotFoundError({
+      message: "User not found",
+      action: "Check the parameters and try again",
+    });
+  }
+
+  return results.rows[0];
 }
 
 async function runInsertQuery(userInputValues) {
@@ -57,6 +88,7 @@ async function validateUniqueUsername(username) {
 
 const user = {
   create,
+  findOneByUsername,
 };
 
 export default user;

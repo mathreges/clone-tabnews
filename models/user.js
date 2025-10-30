@@ -1,6 +1,5 @@
 import database from "infra/database";
 import { ValidationError, NotFoundError } from "infra/errors";
-import { validate } from "uuid";
 
 async function create(userInputValues) {
   const newUser = await runInsertQuery(userInputValues);

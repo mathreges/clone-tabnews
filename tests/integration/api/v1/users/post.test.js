@@ -1,6 +1,5 @@
 import { version as uuidVersion } from "uuid";
 import orchestrator from "tests/orchestrator";
-import database from "infra/database";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();

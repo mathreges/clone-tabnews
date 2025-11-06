@@ -34,6 +34,7 @@ describe("GET to /api/v1/users/[username]", () => {
 
       expect(responseBody).toEqual({
         ...userData,
+        password: responseBody.password,
         id: responseBody.id,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
@@ -67,6 +68,7 @@ describe("GET to /api/v1/users/[username]", () => {
 
       expect(responseBody).toEqual({
         ...userData,
+        password: responseBody.password,
         id: responseBody.id,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,

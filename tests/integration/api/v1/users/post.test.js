@@ -60,7 +60,7 @@ describe("POST to /api/v1/users/", () => {
 
     test("With duplicated email", async () => {
       const userData = {
-        username: "maatheusreges2",
+        username: "maatheusreges3",
         email: "dUpLICAdo@gmail.com",
         password: "password123",
       };
@@ -79,7 +79,7 @@ describe("POST to /api/v1/users/", () => {
       expect(responseBody).toEqual({
         name: "ValidationError",
         message: "The email is already being used.",
-        action: "Use another email to register.",
+        action: "Use another email for this action.",
         status_code: 400,
       });
     });
@@ -105,7 +105,7 @@ describe("POST to /api/v1/users/", () => {
       expect(responseBody).toEqual({
         name: "ValidationError",
         message: "The username is already being used.",
-        action: "Use another username to register.",
+        action: "Use another username for this action.",
         status_code: 400,
       });
     });

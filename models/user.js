@@ -14,6 +14,52 @@ async function findOneByUsername(username) {
   return user;
 }
 
+async function update(username, userInputValues) {
+  const user = await runSelectQuery(username);
+
+  if (
+    userInputValues.username &&
+    userInputValues.username?.toLowerCase() !== username.toLowerCase()
+  ) {
+    await validateUniqueUsername(userInputValues.username);
+  }
+
+  if (userInputValues.email) {
+    await validateUniqueEmail(userInputValues.email);
+  }
+
+  if (userInputValues.password) {
+    userInputValues = await hashPasswordInObject(userInputValues);
+  }
+
+  const userWithNewValues = { ...user, ...userInputValues };
+  const updatedUser = await runUpdateQuery(userWithNewValues);
+
+  return updatedUser;
+}
+
+async function runUpdateQuery(userWithNewValues) {
+  const { id, username, email, password } = userWithNewValues;
+  const results = await database.query({
+    text: `
+      UPDATE
+        users
+      SET 
+        username = $2,
+        email = $3,
+        password = $4,
+        updated_at = timezone('utc', now()) 
+      WHERE 
+        id = $1
+      RETURNING
+        *
+    ;`,
+    values: [id, username, email, password],
+  });
+
+  return results.rows[0];
+}
+
 async function runSelectQuery(username) {
   const results = await database.query({
     text: `
@@ -42,8 +88,8 @@ async function runSelectQuery(username) {
 async function runInsertQuery(userInputValues) {
   let { email, username } = userInputValues;
 
-  await validateUniqueEmail(email);
   await validateUniqueUsername(username);
+  await validateUniqueEmail(email);
 
   userInputValues = await hashPasswordInObject(userInputValues);
 
@@ -73,7 +119,7 @@ async function validateUniqueEmail(email) {
   if (results.rowCount > 0) {
     throw new ValidationError({
       message: "The email is already being used.",
-      action: "Use another email to register.",
+      action: "Use another email for this action.",
     });
   }
 }
@@ -87,7 +133,7 @@ async function validateUniqueUsername(username) {
   if (results.rowCount > 0) {
     throw new ValidationError({
       message: "The username is already being used.",
-      action: "Use another username to register.",
+      action: "Use another username for this action.",
     });
   }
 }
@@ -101,6 +147,7 @@ async function hashPasswordInObject(userInputValues) {
 const user = {
   create,
   findOneByUsername,
+  update,
 };
 
 export default user;
